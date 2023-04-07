@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#212121",
     fontSize: 30,
-    fontWeight: 500,
+    // fontWeight: 500,
     lineHeight: 35,
     marginTop: 92,
     marginBottom: 32,

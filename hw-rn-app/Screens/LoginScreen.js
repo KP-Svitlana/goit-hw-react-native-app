@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   loginForm__title: {
     color: "#212121",
-    fontWeight: 500,
+    // fontWeight: 500,
     fontSize: 30,
     textAlign: "center",
     lineHeight: 35,
