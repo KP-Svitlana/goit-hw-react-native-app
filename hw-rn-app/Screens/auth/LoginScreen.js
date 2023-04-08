@@ -17,7 +17,7 @@ const initialState = {
   password: "",
 };
 
-export function LoginScreen() {
+export function LoginScreen({ navigation }) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isFocused, setIsFocused] = useState({
     email: false,
@@ -131,6 +131,9 @@ export function LoginScreen() {
               style={{
                 ...styles.loginForm__registerBtn,
                 marginBottom: isInputFocused ? 32 : 145,
+              }}
+              onPress={() => {
+                navigation.navigate("Register");
               }}
             >
               <Text style={styles.loginForm__registerBtnText}>

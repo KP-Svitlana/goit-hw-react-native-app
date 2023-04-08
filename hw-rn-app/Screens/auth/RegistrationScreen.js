@@ -21,7 +21,7 @@ const initialState = {
   password: "",
 };
 
-export function RegistrationScreen() {
+export function RegistrationScreen({ navigation }) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isFocused, setIsFocused] = useState({
     login: false,
@@ -165,6 +165,9 @@ export function RegistrationScreen() {
               style={{
                 ...styles.registrationForm__logInBtn,
                 marginBottom: isInputFocused ? 32 : 78,
+              }}
+              onPress={() => {
+                navigation.navigate("Login");
               }}
             >
               <Text style={styles.registrationForm__logInBtnText}>
