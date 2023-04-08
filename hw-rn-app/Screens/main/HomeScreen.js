@@ -3,7 +3,7 @@ import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
 
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, TouchableOpacity } from "react-native";
 
 const Tabs = createBottomTabNavigator();
 
@@ -29,7 +29,25 @@ export const HomeScreen = () => {
         component={PostsScreen}
         options={{
           title: "Публікації",
-
+          headerTitleStyle: {
+            fontFamily: "Roboto-Medium",
+            fontWeight: "500",
+            fontSize: 17,
+            lineHeight: 22,
+          },
+          headerRight: () => (
+            <TouchableOpacity>
+              <Image
+                source={require("../../assets/images/logOut_icon.png")}
+                resizeMode="contain"
+                style={{
+                  ...style.icon,
+                  marginRight: 10,
+                  tintColor: "#565656",
+                }}
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -41,10 +59,8 @@ export const HomeScreen = () => {
                 source={require("../../assets/images/posts_icon.png")}
                 resizeMode="contain"
                 style={{
-                  width: 24,
-                  height: 24,
+                  ...style.icon,
                   tintColor: focused ? "#ffffff" : "#565656",
-                  backgroundColor: "transparent",
                 }}
               />
             </View>
@@ -56,6 +72,27 @@ export const HomeScreen = () => {
         component={CreatePostsScreen}
         options={{
           title: "Створити публікацію",
+          headerTitleStyle: {
+            fontFamily: "Roboto-Medium",
+            fontWeight: "500",
+            fontSize: 17,
+            lineHeight: 22,
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Image
+                source={require("../../assets/images/arrowLeft_icon.png")}
+                resizeMode="contain"
+                style={{
+                  ...style.icon,
+                  marginLeft: 16,
+                  marginRight: 58,
+                  tintColor: "#565656",
+                }}
+              />
+            </TouchableOpacity>
+          ),
+
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -67,10 +104,8 @@ export const HomeScreen = () => {
                 source={require("../../assets/images/newPost_icon.png")}
                 resizeMode="contain"
                 style={{
-                  width: 15,
-                  height: 15,
+                  ...style.icon,
                   tintColor: focused ? "#ffffff" : "#565656",
-                  backgroundColor: "transparent",
                 }}
               />
             </View>
@@ -93,10 +128,8 @@ export const HomeScreen = () => {
                 source={require("../../assets/images/profile_icon.png")}
                 resizeMode="cover"
                 style={{
-                  width: 30,
-                  height: 30,
+                  ...style.icon,
                   tintColor: focused ? "#ffffff" : "#565656",
-                  backgroundColor: "transparent",
                 }}
               />
             </View>
@@ -114,5 +147,9 @@ const style = StyleSheet.create({
     width: 70,
     height: 40,
     borderRadius: 20,
+  },
+  icon: {
+    width: 24,
+    height: 24,
   },
 });
