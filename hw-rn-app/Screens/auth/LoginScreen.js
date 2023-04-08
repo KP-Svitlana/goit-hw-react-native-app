@@ -26,10 +26,11 @@ export function LoginScreen({ navigation }) {
   const [state, setState] = useState(initialState);
   const [isPasswordShow, setIsPasswordShow] = useState(false);
 
-  const keyboardOff = () => {
+  const hendleSubmit = () => {
     setIsInputFocused(false);
     Keyboard.dismiss();
     console.log(state);
+    navigation.navigate("Home");
     setState(initialState);
   };
 
@@ -121,7 +122,7 @@ export function LoginScreen({ navigation }) {
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.loginForm__loginBtn}
-              onPress={keyboardOff}
+              onPress={hendleSubmit}
             >
               <Text style={styles.loginForm__loginBtnText}>Увійти</Text>
             </TouchableOpacity>

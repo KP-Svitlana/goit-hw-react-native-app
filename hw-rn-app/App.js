@@ -1,5 +1,6 @@
 import { RegistrationScreen } from "./Screens/auth/RegistrationScreen";
 import { LoginScreen } from "./Screens/auth/LoginScreen";
+import { HomeScreen } from "./Screens/main/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -22,6 +23,13 @@ export default App = () => {
           }}
           name="Register"
           component={RegistrationScreen}
+        />
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Home"
+          component={HomeScreen}
         />
       </AuthStack.Navigator>
     </NavigationContainer>

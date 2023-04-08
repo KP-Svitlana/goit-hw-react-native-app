@@ -31,10 +31,11 @@ export function RegistrationScreen({ navigation }) {
   const [state, setState] = useState(initialState);
   const [isPasswordShow, setIsPasswordShow] = useState(false);
 
-  const keyboardOff = () => {
+  const hendleSubmit = () => {
     setIsInputFocused(false);
     Keyboard.dismiss();
     console.log(state);
+    navigation.navigate("Home");
     setState(initialState);
   };
 
@@ -153,7 +154,7 @@ export function RegistrationScreen({ navigation }) {
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.registrationForm__registerBtn}
-              onPress={keyboardOff}
+              onPress={hendleSubmit}
             >
               <Text style={styles.registrationForm__registerBtnText}>
                 Зареєструватись
