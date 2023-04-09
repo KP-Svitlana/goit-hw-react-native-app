@@ -55,22 +55,13 @@ export const HomeScreen = ({ navigation }) => {
               />
             </TouchableOpacity>
           ),
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                ...style.icon__wrap,
-                backgroundColor: focused ? "#FF6C00" : "transparent",
-              }}
-            >
-              <Image
-                source={require("../../assets/images/posts_icon.png")}
-                resizeMode="contain"
-                style={{
-                  ...style.icon,
-                  tintColor: focused ? "#ffffff" : "#565656",
-                }}
-              />
-            </View>
+
+          tabBarIcon: () => (
+            <Image
+              source={require("../../assets/images/posts_icon.png")}
+              resizeMode="contain"
+              style={style.icon}
+            />
           ),
         }}
       />
@@ -102,19 +93,20 @@ export const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
           ),
 
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: () => (
             <View
               style={{
                 ...style.icon__wrap,
-                backgroundColor: focused ? "#FF6C00" : "transparent",
+                backgroundColor: "#FF6C00",
               }}
             >
               <Image
                 source={require("../../assets/images/newPost_icon.png")}
                 resizeMode="contain"
                 style={{
-                  ...style.icon,
-                  tintColor: focused ? "#ffffff" : "#565656",
+                  width: 13,
+                  height: 13,
+                  tintColor: "#ffffff",
                 }}
               />
             </View>
@@ -126,23 +118,13 @@ export const HomeScreen = ({ navigation }) => {
         component={ProfileScreen}
         options={{
           headerShown: false,
-          tabBarStyle: { display: "none" },
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                ...style.icon__wrap,
-                backgroundColor: focused ? "#FF6C00" : "transparent",
-              }}
-            >
-              <Image
-                source={require("../../assets/images/profile_icon.png")}
-                resizeMode="cover"
-                style={{
-                  ...style.icon,
-                  tintColor: focused ? "#ffffff" : "#565656",
-                }}
-              />
-            </View>
+
+          tabBarIcon: () => (
+            <Image
+              source={require("../../assets/images/profile_icon.png")}
+              resizeMode="cover"
+              style={style.icon}
+            />
           ),
         }}
       />
@@ -161,5 +143,6 @@ const style = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
+    tintColor: "#565656",
   },
 });
