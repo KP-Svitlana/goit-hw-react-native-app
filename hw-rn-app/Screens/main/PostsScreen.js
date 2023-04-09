@@ -106,9 +106,6 @@ export const PostsScreen = () => {
             )}
           />
         </SafeAreaView>
-        <View>
-          <Text style={{ display: "none" }}>Posts Gallery</Text>
-        </View>
       </View>
     </Container>
   );
@@ -140,9 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     lineHeight: 13,
   },
-  gallery: {
-    // marginTop: 32,
-  },
+
   gallery__img: {
     width: "auto",
     borderRadius: 8,
@@ -166,12 +161,12 @@ const styles = StyleSheet.create({
   gallery__commentsIcon: {
     width: 20,
     height: 20,
-    tintColor: "#565656",
+    tintColor: "#BDBDBD",
   },
   gallery__locationIcon: {
     width: 16,
     height: 18,
-    tintColor: "#565656",
+    tintColor: "#BDBDBD",
   },
   gallery__comments: {
     marginLeft: 6,

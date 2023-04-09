@@ -50,7 +50,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   ...style.icon,
                   marginRight: 10,
-                  tintColor: "#565656",
+                  tintColor: "#BDBDBD",
                 }}
               />
             </TouchableOpacity>
