@@ -3,11 +3,17 @@ import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
 
-import { Image, StyleSheet, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 
 const Tabs = createBottomTabNavigator();
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
   return (
     <Tabs.Navigator
       initialRouteName="Posts"
@@ -35,8 +41,9 @@ export const HomeScreen = () => {
             fontSize: 17,
             lineHeight: 22,
           },
+          headerTitleAlign: "center",
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
               <Image
                 source={require("../../assets/images/logOut_icon.png")}
                 resizeMode="contain"
@@ -67,10 +74,12 @@ export const HomeScreen = () => {
           ),
         }}
       />
+
       <Tabs.Screen
         name="CreatePosts"
         component={CreatePostsScreen}
         options={{
+          tabBarStyle: { display: "none" },
           title: "Створити публікацію",
           headerTitleStyle: {
             fontFamily: "Roboto-Medium",
@@ -78,15 +87,15 @@ export const HomeScreen = () => {
             fontSize: 17,
             lineHeight: 22,
           },
+          headerTitleAlign: "center",
           headerLeft: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Posts")}>
               <Image
                 source={require("../../assets/images/arrowLeft_icon.png")}
                 resizeMode="contain"
                 style={{
                   ...style.icon,
                   marginLeft: 16,
-                  marginRight: 58,
                   tintColor: "#565656",
                 }}
               />
@@ -117,6 +126,7 @@ export const HomeScreen = () => {
         component={ProfileScreen}
         options={{
           headerShown: false,
+          tabBarStyle: { display: "none" },
           tabBarIcon: ({ focused }) => (
             <View
               style={{

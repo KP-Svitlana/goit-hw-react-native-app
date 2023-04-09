@@ -41,31 +41,33 @@ export const CreatePostsScreen = () => {
             textAlign="left"
             // onChange={() => setIsActive(true)}
           />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={{
-              ...styles.newPostForm__btn,
-              backgroundColor: isActive ? "#FF6C00" : "#F6F6F6",
-            }}
-          >
-            <Text
+          <View style={styles.btn_wrap}>
+            <TouchableOpacity
+              activeOpacity={0.7}
               style={{
-                ...styles.newPostForm__btnText,
-                color: isActive ? "#FFFFFF" : "#BDBDBD",
+                ...styles.newPostForm__btn,
+                backgroundColor: isActive ? "#FF6C00" : "#F6F6F6",
               }}
             >
-              Опублікувати
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.newPostForm__iconWrap}>
-              <Image
-                source={require("../../assets/images/trash_icon.png")}
-                resizeMode="contain"
-                style={styles.newPostForm__icon}
-              />
-            </View>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  ...styles.newPostForm__btnText,
+                  color: isActive ? "#FFFFFF" : "#BDBDBD",
+                }}
+              >
+                Опублікувати
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.newPostForm__deleteIconWrap}>
+                <Image
+                  source={require("../../assets/images/trash_icon.png")}
+                  resizeMode="contain"
+                  style={styles.newPostForm__deleteIcon}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </Container>
@@ -80,7 +82,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
   },
-  newPostForm__img: { width: 345, height: 240, marginTop: 42 },
+  newPostForm__img: {
+    width: "auto",
+    height: 240,
+    marginTop: 42,
+  },
   newPostForm__text: {
     fontSize: 16,
     fontFamily: "Roboto-Regular",
@@ -96,6 +102,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     fontFamily: "Roboto-Regular",
   },
+  btn_wrap: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
   newPostForm__btn: {
     height: 50,
     borderRadius: 100,
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     fontFamily: "Roboto-Regular",
   },
-  newPostForm__iconWrap: {
+  newPostForm__deleteIconWrap: {
     justifyContent: "center",
     alignItems: "center",
 
@@ -116,8 +126,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: "#F6F6F6",
+    marginBottom: 22,
+    marginRight: "auto",
+    marginLeft: "auto",
   },
-  newPostForm__icon: {
+  newPostForm__deleteIcon: {
     width: 24,
     height: 24,
     tintColor: "#a2a2a2",
