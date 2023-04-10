@@ -207,6 +207,9 @@ const styles = StyleSheet.create({
     right: 115,
     width: 25,
     height: 25,
+    tintColor: "#FF6C00",
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
   },
 
   registrationForm__title: {

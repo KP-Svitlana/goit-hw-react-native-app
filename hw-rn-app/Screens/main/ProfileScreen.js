@@ -57,7 +57,7 @@ const gallery = [
   },
 ];
 
-export function ProfileScreen() {
+export function ProfileScreen({ navigation }) {
   return (
     <Container>
       <ImageBackground
@@ -80,7 +80,7 @@ export function ProfileScreen() {
             style={styles.profileForm__img}
           />
           <Image
-            source={require("../../assets/images/close_icon.jpg")}
+            source={require("../../assets/images/close_icon_2.png")}
             style={styles.profileForm__svg}
           />
           <Text style={styles.profileForm__title}> Example Name</Text>
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     height: 25,
     tintColor: "#BDBDBD",
     backgroundColor: "#ffffff",
+    borderRadius: 15,
   },
 
   profileForm__title: {
