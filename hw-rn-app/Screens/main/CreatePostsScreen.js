@@ -9,7 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { Container } from "../../Components/Container";
-
+import { Camera, CameraType } from "expo-camera";
 import { useState } from "react";
 
 export const CreatePostsScreen = () => {
@@ -22,10 +22,22 @@ export const CreatePostsScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : null}
       >
         <View style={styles.newPostForm}>
-          <Image
-            style={styles.newPostForm__img}
-            source={require("../../assets/images/photo_gallery.png")}
-          />
+          <Camera style={styles.newPostForm__camera} type={CameraType.back}>
+            <TouchableOpacity>
+              <Image
+                source={require("../../assets/images/camera_btn_icon.png")}
+                resizeMode="contain"
+                style={styles.newPostForm__cameraIcon}
+              />
+            </TouchableOpacity>
+            {/* <TouchableOpacity>
+              <Image
+                source={require("../../assets/images/toggle_camera_icon.png")}
+                resizeMode="contain"
+                style={styles.newPostForm__toggleIcon}
+              />
+            </TouchableOpacity> */}
+          </Camera>
           <Text style={styles.newPostForm__text}>Завантажте фото</Text>
           <TextInput
             style={styles.newPostForm__input}
@@ -82,11 +94,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
   },
-  newPostForm__img: {
+  newPostForm__camera: {
     width: "auto",
     height: 240,
     marginTop: 42,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
   },
+  newPostForm__cameraIcon: {
+    width: 60,
+    height: 60,
+  },
+
+  // newPostForm__toggleIcon: {
+  //   width: 60,
+  //   height: 60,
+  //   tintColor: "#ffffff",
+  // },
+
   newPostForm__text: {
     fontSize: 16,
     fontFamily: "Roboto-Regular",
