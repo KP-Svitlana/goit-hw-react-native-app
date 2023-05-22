@@ -14,6 +14,13 @@ import { useState } from "react";
 
 export const CreatePostsScreen = () => {
   const [isActive, setIsActive] = useState(false);
+  const [type, setType] = useState(CameraType.back);
+
+  function toggleCameraType() {
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back
+    );
+  }
 
   return (
     <Container>
@@ -22,21 +29,23 @@ export const CreatePostsScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : null}
       >
         <View style={styles.newPostForm}>
-          <Camera style={styles.newPostForm__camera} type={CameraType.back}>
-            <TouchableOpacity>
-              <Image
-                source={require("../../assets/images/camera_btn_icon.png")}
-                resizeMode="contain"
-                style={styles.newPostForm__cameraIcon}
-              />
-            </TouchableOpacity>
-            {/* <TouchableOpacity>
-              <Image
-                source={require("../../assets/images/toggle_camera_icon.png")}
-                resizeMode="contain"
-                style={styles.newPostForm__toggleIcon}
-              />
-            </TouchableOpacity> */}
+          <Camera style={styles.newPostForm__camera} type={type}>
+            <View style={styles.newPostForm__cameraIconWrap}>
+              <TouchableOpacity>
+                <Image
+                  source={require("../../assets/images/camera_btn_icon.png")}
+                  resizeMode="contain"
+                  style={styles.newPostForm__cameraIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={toggleCameraType}>
+                <Image
+                  source={require("../../assets/images/toggle_camera_icon.png")}
+                  resizeMode="contain"
+                  style={styles.newPostForm__toggleIcon}
+                />
+              </TouchableOpacity>
+            </View>
           </Camera>
           <Text style={styles.newPostForm__text}>Завантажте фото</Text>
           <TextInput
@@ -60,6 +69,7 @@ export const CreatePostsScreen = () => {
                 ...styles.newPostForm__btn,
                 backgroundColor: isActive ? "#FF6C00" : "#F6F6F6",
               }}
+              onPress={() => {}}
             >
               <Text
                 style={{
@@ -98,20 +108,27 @@ const styles = StyleSheet.create({
     width: "auto",
     height: 240,
     marginTop: 42,
-    justifyContent: "center",
-    alignItems: "center",
     borderRadius: 8,
+    justifyContent: "center",
   },
+  newPostForm__cameraIconWrap: {
+    position: "relative",
+    alignItems: "center",
+  },
+
   newPostForm__cameraIcon: {
     width: 60,
     height: 60,
   },
 
-  // newPostForm__toggleIcon: {
-  //   width: 60,
-  //   height: 60,
-  //   tintColor: "#ffffff",
-  // },
+  newPostForm__toggleIcon: {
+    position: "absolute",
+    // right: 100,
+    // bottom: -80,
+    width: 60,
+    height: 60,
+    tintColor: "#ffffff",
+  },
 
   newPostForm__text: {
     fontSize: 16,
