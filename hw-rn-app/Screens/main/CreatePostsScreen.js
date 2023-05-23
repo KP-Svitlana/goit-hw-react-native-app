@@ -15,12 +15,19 @@ import { useState } from "react";
 export const CreatePostsScreen = () => {
   const [isActive, setIsActive] = useState(false);
   const [type, setType] = useState(CameraType.back);
+  const [camera, setCamera] = useState(null);
+  const [photo, setPhoto] = useState("");
 
   function toggleCameraType() {
     setType((current) =>
       current === CameraType.back ? CameraType.front : CameraType.back
     );
   }
+
+  const takePhoto = async () => {
+    const photo = await camera.takePictureAsync();
+    setPhoto(photo.uri);
+  };
 
   return (
     <Container>
@@ -29,8 +36,20 @@ export const CreatePostsScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : null}
       >
         <View style={styles.newPostForm}>
-          <Camera style={styles.newPostForm__camera} type={type}>
-            <TouchableOpacity>
+          <Camera
+            style={styles.newPostForm__camera}
+            type={type}
+            ref={setCamera}
+          >
+            {photo && (
+              <View style={styles.newPostForm__takePhotoContainer}>
+                <Image
+                  source={{ uri: photo }}
+                  style={{ height: 200, width: 200 }}
+                />
+              </View>
+            )}
+            <TouchableOpacity onPress={takePhoto}>
               <Image
                 source={require("../../assets/images/camera_btn_icon.png")}
                 resizeMode="contain"
@@ -105,6 +124,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
     paddingVertical: 32,
+  },
+  newPostForm__takePhotoContainer: {
+    position: "absolute",
+    top: 5,
+    left: 5,
+    borderColor: "#ffffff",
+    borderWidth: 1,
   },
   newPostForm__camera: {
     flex: 1,
