@@ -30,14 +30,14 @@ export const CreatePostsScreen = () => {
       >
         <View style={styles.newPostForm}>
           <Camera style={styles.newPostForm__camera} type={type}>
-            <View style={styles.newPostForm__cameraIconWrap}>
-              <TouchableOpacity>
-                <Image
-                  source={require("../../assets/images/camera_btn_icon.png")}
-                  resizeMode="contain"
-                  style={styles.newPostForm__cameraIcon}
-                />
-              </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={require("../../assets/images/camera_btn_icon.png")}
+                resizeMode="contain"
+                style={styles.newPostForm__cameraIcon}
+              />
+            </TouchableOpacity>
+            <View style={styles.newPostForm__toggleIconWrap}>
               <TouchableOpacity onPress={toggleCameraType}>
                 <Image
                   source={require("../../assets/images/toggle_camera_icon.png")}
@@ -47,6 +47,7 @@ export const CreatePostsScreen = () => {
               </TouchableOpacity>
             </View>
           </Camera>
+
           <Text style={styles.newPostForm__text}>Завантажте фото</Text>
           <TextInput
             style={styles.newPostForm__input}
@@ -80,15 +81,15 @@ export const CreatePostsScreen = () => {
                 Опублікувати
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.newPostForm__deleteIconWrap}>
+            <View style={styles.newPostForm__deleteIconWrap}>
+              <TouchableOpacity>
                 <Image
                   source={require("../../assets/images/trash_icon.png")}
                   resizeMode="contain"
                   style={styles.newPostForm__deleteIcon}
                 />
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -103,31 +104,31 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
+    paddingVertical: 32,
   },
   newPostForm__camera: {
+    flex: 1,
     width: "auto",
     height: 240,
-    marginTop: 42,
     borderRadius: 8,
     justifyContent: "center",
-  },
-  newPostForm__cameraIconWrap: {
-    position: "relative",
-    alignItems: "center",
   },
 
   newPostForm__cameraIcon: {
     width: 60,
     height: 60,
+    alignSelf: "center",
   },
 
   newPostForm__toggleIcon: {
-    position: "absolute",
-    // right: 100,
-    // bottom: -80,
     width: 60,
     height: 60,
     tintColor: "#ffffff",
+  },
+  newPostForm__toggleIconWrap: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
   },
 
   newPostForm__text: {
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: "#F6F6F6",
-    marginBottom: 22,
+    // marginBottom: 22,
     marginRight: "auto",
     marginLeft: "auto",
   },
