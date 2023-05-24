@@ -8,53 +8,30 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container } from "../../Components/Container";
+import { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
 
-const gallery = [
-  {
-    id: 1,
-    img: require("../../assets/images/photo_1.png"),
-    title: "Photo_1",
-    comments: 6,
-    location: "Location_1",
-  },
-  {
-    id: 2,
-    img: require("../../assets/images/photo_2.png"),
-    title: "Photo_2",
-    comments: 11,
-    location: "Location_1",
-  },
-  {
-    id: 3,
-    img: require("../../assets/images/photo_1.png"),
-    title: "Photo_3",
-    comments: 10,
-    location: "Location_1",
-  },
-  {
-    id: 4,
-    img: require("../../assets/images/photo_2.png"),
-    title: "Photo_4",
-    comments: 9,
-    location: "Location_1",
-  },
-  {
-    id: 5,
-    img: require("../../assets/images/photo_1.png"),
-    title: "Photo_5",
-    comments: 8,
-    location: "Location_1",
-  },
-  {
-    id: 6,
-    img: require("../../assets/images/photo_2.png"),
-    title: "Photo_6",
-    comments: 7,
-    location: "Location_1",
-  },
-];
+export const PostsScreen = ({ route }) => {
+  const [gallery, setGallery] = useState([
+    {
+      id: 1,
+      img: "https://img.freepik.com/free-photo/summer-landscape-mountains-blue-sky_661209-67.jpg?size=626&ext=jpg",
+      title: "Photo_1",
+      comments: 6,
+      location: "Location_1",
+    },
+  ]);
+  console.log("route.params", route.params);
 
-export const PostsScreen = () => {
+  useEffect(() => {
+    if (route.params) {
+      setGallery((prevState) => [
+        ...prevState,
+        { ...route.params, id: nanoid() },
+      ]);
+    }
+  }, [route.params]);
+
   return (
     <Container>
       <View style={styles.customerInfo}>
@@ -74,7 +51,7 @@ export const PostsScreen = () => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <View style={{ marginTop: 32 }}>
-                <Image source={item.img} style={styles.gallery__img} />
+                <Image source={{ uri: item.img }} style={styles.gallery__img} />
                 <Text style={styles.gallery__title}>{item.title}</Text>
                 <View style={styles.gallery__container}>
                   <View style={styles.gallery__commentsWrap}>
@@ -140,6 +117,7 @@ const styles = StyleSheet.create({
 
   gallery__img: {
     width: "auto",
+    height: 240,
     borderRadius: 8,
   },
   gallery__title: {

@@ -12,11 +12,13 @@ import { Container } from "../../Components/Container";
 import { Camera, CameraType } from "expo-camera";
 import { useState } from "react";
 
-export const CreatePostsScreen = () => {
+export const CreatePostsScreen = ({ navigation }) => {
   const [isActive, setIsActive] = useState(false);
   const [type, setType] = useState(CameraType.back);
   const [camera, setCamera] = useState(null);
-  const [photo, setPhoto] = useState("");
+  const [img, setImg] = useState("");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
 
   function toggleCameraType() {
     setType((current) =>
@@ -25,8 +27,17 @@ export const CreatePostsScreen = () => {
   }
 
   const takePhoto = async () => {
-    const photo = await camera.takePictureAsync();
-    setPhoto(photo.uri);
+    const img = await camera.takePictureAsync();
+    setImg(img.uri);
+  };
+
+  const onFormSubmit = () => {
+    if (img) {
+      navigation.navigate("Posts", { img, title, location });
+      // setPhoto("");
+      setTitle("");
+      setLocation("");
+    }
   };
 
   return (
@@ -41,10 +52,10 @@ export const CreatePostsScreen = () => {
             type={type}
             ref={setCamera}
           >
-            {photo && (
+            {img && (
               <View style={styles.newPostForm__takePhotoContainer}>
                 <Image
-                  source={{ uri: photo }}
+                  source={{ uri: img }}
                   style={{ height: 200, width: 200 }}
                 />
               </View>
@@ -73,14 +84,22 @@ export const CreatePostsScreen = () => {
             placeholder="Назва"
             placeholderTextColor="#BDBDBD"
             textAlign="left"
-            // onChange={() => setIsActive(true)}
+            value={title}
+            onChangeText={(text) => {
+              setIsActive(true);
+              setTitle(text);
+            }}
           />
           <TextInput
             style={styles.newPostForm__input}
             placeholder="Місцевість"
             placeholderTextColor="#BDBDBD"
             textAlign="left"
-            // onChange={() => setIsActive(true)}
+            value={location}
+            onChangeText={(text) => {
+              setIsActive(true);
+              setLocation(text);
+            }}
           />
           <View style={styles.btn_wrap}>
             <TouchableOpacity
@@ -89,7 +108,7 @@ export const CreatePostsScreen = () => {
                 ...styles.newPostForm__btn,
                 backgroundColor: isActive ? "#FF6C00" : "#F6F6F6",
               }}
-              onPress={() => {}}
+              onPress={onFormSubmit}
             >
               <Text
                 style={{
