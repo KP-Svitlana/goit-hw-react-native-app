@@ -21,14 +21,10 @@ export const PostsScreen = ({ route }) => {
       location: "Location_1",
     },
   ]);
-  console.log("route.params", route.params);
 
   useEffect(() => {
     if (route.params) {
-      setGallery((prevState) => [
-        ...prevState,
-        { ...route.params, id: nanoid() },
-      ]);
+      setGallery((prevState) => [route.params, ...prevState]);
     }
   }, [route.params]);
 
@@ -48,7 +44,7 @@ export const PostsScreen = ({ route }) => {
         <SafeAreaView style={styles.gallery}>
           <FlatList
             data={gallery}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => index}
             renderItem={({ item }) => (
               <View style={{ marginTop: 32 }}>
                 <Image source={{ uri: item.img }} style={styles.gallery__img} />

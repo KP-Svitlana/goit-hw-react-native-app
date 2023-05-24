@@ -11,6 +11,7 @@ import {
 import { Container } from "../../Components/Container";
 import { Camera, CameraType } from "expo-camera";
 import { useState } from "react";
+import * as Location from "expo-location";
 
 export const CreatePostsScreen = ({ navigation }) => {
   const [isActive, setIsActive] = useState(false);
@@ -28,13 +29,15 @@ export const CreatePostsScreen = ({ navigation }) => {
 
   const takePhoto = async () => {
     const img = await camera.takePictureAsync();
+    const locationCordinate = await Location.getCurrentPositionAsync();
+    console.log("locationCordinate", locationCordinate);
     setImg(img.uri);
   };
 
   const onFormSubmit = () => {
     if (img) {
       navigation.navigate("Posts", { img, title, location });
-      // setPhoto("");
+      // setImg("");
       setTitle("");
       setLocation("");
     }
