@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export const CommentsScreen = () => {
+const CommentsScreen = () => {
   return (
-    <View>
-      <Text style={styles.container}>Comments Screen</Text>
+    <View style={styles.container}>
+      <Text style={{ color: "black" }}>Comments Screen</Text>
     </View>
   );
 };
@@ -14,3 +14,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default CommentsScreen;

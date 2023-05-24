@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { PostsScreen } from "./PostsScreen";
+import PostsScreen from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
 
@@ -41,6 +41,7 @@ export const HomeScreen = ({ navigation }) => {
             fontSize: 17,
             lineHeight: 22,
           },
+
           headerTitleAlign: "center",
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>

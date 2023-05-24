@@ -1,161 +1,55 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { Container } from "../../Components/Container";
-import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import DefaultPostsScreen from "../nestedScreens/DefaultScreenPost";
+import CommentsScreen from "../nestedScreens/CommentsScreen";
+import MapScreen from "../nestedScreens/MapScreen";
 
-export const PostsScreen = ({ route }) => {
-  const [gallery, setGallery] = useState([
-    {
-      id: 1,
-      img: "https://img.freepik.com/free-photo/summer-landscape-mountains-blue-sky_661209-67.jpg?size=626&ext=jpg",
-      title: "Photo_1",
-      comments: 6,
-      location: "Location_1",
-    },
-  ]);
+const NestedScreen = createStackNavigator();
 
-  useEffect(() => {
-    if (route.params) {
-      setGallery((prevState) => [route.params, ...prevState]);
-    }
-  }, [route.params]);
-
+const PostsScreen = () => {
   return (
-    <Container>
-      <View style={styles.customerInfo}>
-        <View style={styles.customerInfo__wrap}>
-          <Image
-            source={require("../../assets/images/User_ava.png")}
-            style={styles.customerInfo__img}
-          />
-          <View style={styles.customerInfo__textWrap}>
-            <Text style={styles.customerInfo__title}>example name</Text>
-            <Text style={styles.customerInfo__email}>email@example.com</Text>
-          </View>
-        </View>
-        <SafeAreaView style={styles.gallery}>
-          <FlatList
-            data={gallery}
-            keyExtractor={(item, index) => index}
-            renderItem={({ item }) => (
-              <View style={{ marginTop: 32 }}>
-                <Image source={{ uri: item.img }} style={styles.gallery__img} />
-                <Text style={styles.gallery__title}>{item.title}</Text>
-                <View style={styles.gallery__container}>
-                  <View style={styles.gallery__commentsWrap}>
-                    <TouchableOpacity>
-                      <Image
-                        source={require("../../assets/images/message-circle.png")}
-                        resizeMode="cover"
-                        style={styles.gallery__commentsIcon}
-                      />
-                    </TouchableOpacity>
-                    <Text style={styles.gallery__comments}>
-                      {item.comments}
-                    </Text>
-                  </View>
-                  <View style={styles.gallery__locationWrap}>
-                    <TouchableOpacity>
-                      <Image
-                        source={require("../../assets/images/location_icon.png")}
-                        resizeMode="cover"
-                        style={styles.gallery__locationIcon}
-                      />
-                    </TouchableOpacity>
-                    <Text style={styles.gallery__location}>
-                      {item.location}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            )}
-          />
-        </SafeAreaView>
-      </View>
-    </Container>
+    <NestedScreen.Navigator initialRouteName="DefaultPosts">
+      <NestedScreen.Screen
+        name="DefaultPosts"
+        component={DefaultPostsScreen}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      />
+      <NestedScreen.Screen
+        name="CommentsScreen"
+        component={CommentsScreen}
+        options={{
+          title: "Коментарі",
+          headerTitleStyle: {
+            headerMode: "float",
+            fontFamily: "Roboto-Medium",
+            fontWeight: "500",
+            fontSize: 17,
+            lineHeight: 22,
+          },
+          headerTitleAlign: "center",
+          headerMode: "screen",
+        }}
+      />
+      <NestedScreen.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{
+          title: "Карта",
+          tabBarStyle: { display: "none" },
+          headerTitleStyle: {
+            fontFamily: "Roboto-Medium",
+            fontWeight: "500",
+            fontSize: 17,
+            lineHeight: 22,
+          },
+          headerTitleAlign: "center",
+        }}
+      />
+    </NestedScreen.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  customerInfo: {
-    flex: 1,
-    justifyContent: "flex-start",
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 16,
-    marginTop: 32,
-  },
-  customerInfo__wrap: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  customerInfo__img: {
-    marginRight: 8,
-  },
-  customerInfo__textWrap: { alignItems: "center" },
-  customerInfo__title: {
-    fontFamily: "Roboto-Bold",
-    fontSize: 13,
-    lineHeight: 15,
-  },
-  customerInfo__email: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 11,
-    lineHeight: 13,
-  },
-
-  gallery__img: {
-    width: "auto",
-    height: 240,
-    borderRadius: 8,
-  },
-  gallery__title: {
-    marginTop: 8,
-    fontFamily: "Roboto-Medium",
-    fontSize: 16,
-    lineHeight: 19,
-  },
-  gallery__container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 8,
-  },
-
-  gallery__commentsWrap: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  gallery__commentsIcon: {
-    width: 20,
-    height: 20,
-    tintColor: "#BDBDBD",
-  },
-  gallery__locationIcon: {
-    width: 16,
-    height: 18,
-    tintColor: "#BDBDBD",
-  },
-  gallery__comments: {
-    marginLeft: 6,
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-    lineHeight: 19,
-  },
-  gallery__locationWrap: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  gallery__location: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-    lineHeight: 19,
-    marginLeft: 6,
-  },
-});
+export default PostsScreen;

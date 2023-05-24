@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Container } from "../../Components/Container";
 import { Camera, CameraType } from "expo-camera";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 
 export const CreatePostsScreen = ({ navigation }) => {
@@ -20,6 +20,17 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [img, setImg] = useState("");
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+    })();
+  }, []);
 
   function toggleCameraType() {
     setType((current) =>
@@ -29,14 +40,15 @@ export const CreatePostsScreen = ({ navigation }) => {
 
   const takePhoto = async () => {
     const img = await camera.takePictureAsync();
-    const locationCordinate = await Location.getCurrentPositionAsync();
-    console.log("locationCordinate", locationCordinate);
+    const locationCoord = await Location.getCurrentPositionAsync({});
+    console.log(locationCoord.coords);
+    setLocation(locationCoord);
     setImg(img.uri);
   };
 
   const onFormSubmit = () => {
     if (img) {
-      navigation.navigate("Posts", { img, title, location });
+      navigation.navigate("DefaultPosts", { img, title });
       // setImg("");
       setTitle("");
       setLocation("");
@@ -101,7 +113,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             value={location}
             onChangeText={(text) => {
               setIsActive(true);
-              setLocation(text);
+              // setLocation(text);
             }}
           />
           <View style={styles.btn_wrap}>
