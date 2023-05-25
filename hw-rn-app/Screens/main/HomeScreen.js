@@ -18,6 +18,14 @@ export const HomeScreen = ({ navigation }) => {
     <Tabs.Navigator
       initialRouteName="Posts"
       screenOptions={{
+        headerShown: false,
+        headerTitleStyle: {
+          fontFamily: "Roboto-Medium",
+          fontWeight: "500",
+          fontSize: 17,
+          lineHeight: 22,
+        },
+        headerTitleAlign: "center",
         tabBarShowLabel: false,
         tabBarStyle: [
           {
@@ -34,29 +42,6 @@ export const HomeScreen = ({ navigation }) => {
         name="Posts"
         component={PostsScreen}
         options={{
-          title: "Публікації",
-          headerTitleStyle: {
-            fontFamily: "Roboto-Medium",
-            fontWeight: "500",
-            fontSize: 17,
-            lineHeight: 22,
-          },
-
-          headerTitleAlign: "center",
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Image
-                source={require("../../assets/images/logOut_icon.png")}
-                resizeMode="contain"
-                style={{
-                  ...style.icon,
-                  marginRight: 10,
-                  tintColor: "#BDBDBD",
-                }}
-              />
-            </TouchableOpacity>
-          ),
-
           tabBarIcon: () => (
             <Image
               source={require("../../assets/images/posts_icon.png")}
@@ -71,15 +56,10 @@ export const HomeScreen = ({ navigation }) => {
         name="CreatePosts"
         component={CreatePostsScreen}
         options={{
+          headerShown: true,
           tabBarStyle: { display: "none" },
           title: "Створити публікацію",
-          headerTitleStyle: {
-            fontFamily: "Roboto-Medium",
-            fontWeight: "500",
-            fontSize: 17,
-            lineHeight: 22,
-          },
-          headerTitleAlign: "center",
+
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Posts")}>
               <Image

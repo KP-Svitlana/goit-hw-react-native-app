@@ -20,6 +20,7 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [img, setImg] = useState("");
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
+  const [locationCords, setLocationCords] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -41,14 +42,21 @@ export const CreatePostsScreen = ({ navigation }) => {
   const takePhoto = async () => {
     const img = await camera.takePictureAsync();
     const locationCoord = await Location.getCurrentPositionAsync({});
-    console.log(locationCoord.coords);
-    setLocation(locationCoord);
+    setLocationCords({
+      longitude: locationCoord.coords.longitude,
+      latitude: locationCoord.coords.latitude,
+    });
     setImg(img.uri);
   };
 
   const onFormSubmit = () => {
     if (img) {
-      navigation.navigate("DefaultPosts", { img, title });
+      navigation.navigate("DefaultPosts", {
+        img,
+        title,
+        location,
+        locationCords,
+      });
       // setImg("");
       setTitle("");
       setLocation("");
@@ -113,7 +121,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             value={location}
             onChangeText={(text) => {
               setIsActive(true);
-              // setLocation(text);
+              setLocation(text);
             }}
           />
           <View style={styles.btn_wrap}>

@@ -13,11 +13,11 @@ import { useState, useEffect } from "react";
 export const DefaultPostsScreen = ({ route, navigation }) => {
   const [gallery, setGallery] = useState([
     {
-      id: 1,
       img: "https://img.freepik.com/free-photo/summer-landscape-mountains-blue-sky_661209-67.jpg?size=626&ext=jpg",
       title: "Photo_1",
       comments: 6,
-      location: "Location_1",
+      location: "Ukraine",
+      locationCords: { longitude: 22.90266, latitude: 48.49278 },
     },
   ]);
 
@@ -68,7 +68,7 @@ export const DefaultPostsScreen = ({ route, navigation }) => {
                   <View style={styles.gallery__locationWrap}>
                     <TouchableOpacity
                       onPress={() => {
-                        navigation.navigate("MapScreen");
+                        navigation.navigate("MapScreen", { item });
                       }}
                     >
                       <Image
