@@ -76,7 +76,7 @@ export const CreatePostsScreen = ({ navigation }) => {
         location,
         locationCords,
       });
-      // setImg("");
+      setImg("");
       setTitle("");
       setLocation("");
     }
