@@ -58,14 +58,16 @@ export function RegistrationScreen({ navigation }) {
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
           <View style={styles.registrationForm}>
-            <Image
-              source={require("../../assets/images/photo_ava.png")}
-              style={styles.registrationForm__img}
-            />
-            <Image
-              source={require("../../assets/images/add.png")}
-              style={styles.registrationForm__svg}
-            />
+            <View style={styles.registrationForm__imgWrap}>
+              <Image
+                source={require("../../assets/images/photo_ava.png")}
+                style={styles.registrationForm__img}
+              />
+              <Image
+                source={require("../../assets/images/add.png")}
+                style={styles.registrationForm__svg}
+              />
+            </View>
             <Text style={styles.registrationForm__title}>Регістрація</Text>
             <TextInput
               style={{
@@ -194,17 +196,19 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 25,
     paddingHorizontal: 16,
   },
-  registrationForm__img: {
+  registrationForm__imgWrap: {
     position: "absolute",
     top: -60,
-    right: 127,
+    alignSelf: "center",
+  },
+  registrationForm__img: {
     width: 120,
     height: 120,
   },
   registrationForm__svg: {
     position: "absolute",
-    top: 20,
-    right: 115,
+    bottom: 14,
+    right: -14,
     width: 25,
     height: 25,
     tintColor: "#FF6C00",

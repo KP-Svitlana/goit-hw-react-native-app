@@ -75,14 +75,17 @@ export function ProfileScreen({ navigation }) {
               style={styles.icon}
             />
           </TouchableOpacity>
-          <Image
-            source={require("../../assets/images/user_ava_big.png")}
-            style={styles.profileForm__img}
-          />
-          <Image
-            source={require("../../assets/images/close_icon_2.png")}
-            style={styles.profileForm__svg}
-          />
+          <View style={styles.profileForm__imgWrap}>
+            <Image
+              source={require("../../assets/images/user_ava_big.png")}
+              style={styles.profileForm__img}
+            />
+            <Image
+              source={require("../../assets/images/close_icon_2.png")}
+              style={styles.profileForm__svg}
+            />
+          </View>
+
           <Text style={styles.profileForm__title}> Example Name</Text>
 
           <SafeAreaView style={styles.gallery}>
@@ -148,17 +151,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 150,
   },
-  profileForm__img: {
+  profileForm__imgWrap: {
     position: "absolute",
     top: -60,
-    right: 127,
+    alignSelf: "center",
+  },
+  profileForm__img: {
     width: 120,
     height: 120,
   },
   profileForm__svg: {
     position: "absolute",
-    top: 20,
-    right: 115,
+    bottom: 14,
+    right: -14,
     width: 25,
     height: 25,
     tintColor: "#BDBDBD",
