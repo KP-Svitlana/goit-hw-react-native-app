@@ -73,7 +73,7 @@ const PostsScreen = ({ navigation }) => {
         name="MapScreen"
         component={MapScreen}
         options={{
-          title: "Карта",
+          title: "Мапа",
         }}
       />
     </NestedScreen.Navigator>

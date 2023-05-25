@@ -7,6 +7,7 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
+  Button,
 } from "react-native";
 import { Container } from "../../Components/Container";
 import { Camera, CameraType } from "expo-camera";
@@ -22,6 +23,7 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState("");
   const [locationCords, setLocationCords] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
   useEffect(() => {
     (async () => {
@@ -32,6 +34,23 @@ export const CreatePostsScreen = ({ navigation }) => {
       }
     })();
   }, []);
+
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: "center" }}>
+          We need your permission to show the camera
+        </Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
 
   function toggleCameraType() {
     setType((current) =>

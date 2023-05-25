@@ -14,7 +14,7 @@ export const DefaultPostsScreen = ({ route, navigation }) => {
   const [gallery, setGallery] = useState([
     {
       img: "https://img.freepik.com/free-photo/summer-landscape-mountains-blue-sky_661209-67.jpg?size=626&ext=jpg",
-      title: "Photo_1",
+      title: "Карпати",
       comments: 6,
       location: "Ukraine",
       locationCords: { longitude: 22.90266, latitude: 48.49278 },
