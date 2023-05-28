@@ -14,6 +14,8 @@ import {
 } from "react-native";
 
 import { Container } from "../../Components/Container";
+import { authSingUpUser } from "../../redux/auth/authOperations";
+import { useDispatch } from "react-redux";
 
 const initialState = {
   login: "",
@@ -31,10 +33,13 @@ export function RegistrationScreen({ navigation }) {
   const [state, setState] = useState(initialState);
   const [isPasswordShow, setIsPasswordShow] = useState(false);
 
+  const dispatch = useDispatch();
+
   const hendleSubmit = () => {
     setIsInputFocused(false);
     Keyboard.dismiss();
-    console.log(state);
+    // console.log(state);
+    dispatch(authSingUpUser(state));
     navigation.navigate("Home");
     setState(initialState);
   };

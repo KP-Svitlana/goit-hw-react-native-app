@@ -29,7 +29,7 @@ export function LoginScreen({ navigation }) {
   const hendleSubmit = () => {
     setIsInputFocused(false);
     Keyboard.dismiss();
-    console.log(state);
+    // console.log(state);
     navigation.navigate("Home");
     setState(initialState);
   };

@@ -4,7 +4,8 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
 export default App = () => {
-  const routing = useRoute();
+  const routing = useRoute(false);
+
   return (
     <Provider store={store}>
       <NavigationContainer>{routing}</NavigationContainer>
