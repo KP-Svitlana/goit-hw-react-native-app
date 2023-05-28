@@ -6,30 +6,32 @@ import { HomeScreen } from "./Screens/main/HomeScreen";
 
 const AuthStack = createStackNavigator();
 
-export const useRoute = () => {
-  return (
-    <AuthStack.Navigator initialRouteName="Login">
-      <AuthStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Login"
-        component={LoginScreen}
-      />
-      <AuthStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Register"
-        component={RegistrationScreen}
-      />
-      <AuthStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Home"
-        component={HomeScreen}
-      />
-    </AuthStack.Navigator>
-  );
+export const useRoute = (isAuth) => {
+  if (!isAuth) {
+    return (
+      <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Register"
+          component={RegistrationScreen}
+        />
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Home"
+          component={HomeScreen}
+        />
+      </AuthStack.Navigator>
+    );
+  }
 };
