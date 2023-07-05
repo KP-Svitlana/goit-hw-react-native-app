@@ -12,6 +12,10 @@ import {
 } from "react-native";
 import { Container } from "../../Components/Container";
 
+import { useDispatch } from "react-redux";
+
+import { authSingInUser } from "../../redux/auth/authOperations";
+
 const initialState = {
   email: "",
   password: "",
@@ -25,11 +29,13 @@ export function LoginScreen({ navigation }) {
   });
   const [state, setState] = useState(initialState);
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const dispatch = useDispatch();
 
   const hendleSubmit = () => {
     setIsInputFocused(false);
     Keyboard.dismiss();
     console.log(state);
+    dispatch(authSingInUser(state));
     navigation.navigate("Home");
     setState(initialState);
   };
