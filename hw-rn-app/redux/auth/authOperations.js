@@ -38,6 +38,8 @@ const authSingInUser =
   };
 const authSingOutUser = () => async (dispatch, getState) => {};
 
-const authStateChangeUser = () => async (dispatch, getState) => {};
+const authStateChangeUser = () => async (dispatch, getState) => {
+  await db.auth().onAuthStateChanged((user) => setUser(user));
+};
 
 export { authSingUpUser, authSingInUser, authSingOutUser, authStateChangeUser };
