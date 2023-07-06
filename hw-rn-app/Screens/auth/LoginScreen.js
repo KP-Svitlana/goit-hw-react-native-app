@@ -36,7 +36,6 @@ export function LoginScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     dispatch(authSingInUser(state));
-    navigation.navigate("Home");
     setState(initialState);
   };
 
