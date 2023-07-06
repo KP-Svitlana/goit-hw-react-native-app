@@ -41,7 +41,6 @@ export function RegistrationScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     dispatch(authSingUpUser(state));
-    navigation.navigate("Home");
     setState(initialState);
   };
 
