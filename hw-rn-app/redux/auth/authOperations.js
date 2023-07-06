@@ -1,13 +1,15 @@
 import db from "../../firebase/config";
+import { authSlice } from "./authReducer";
 
 const authSingUpUser =
   ({ login, email, password }) =>
   async (dispatch, getState) => {
     try {
-      const user = await db
+      const { user } = await db
         .auth()
         .createUserWithEmailAndPassword(email, password);
-      console.log(user);
+      dispatch(authSlice.actions.updateUserProfile({ userId: user.uid }));
+      console.log("userSingUp", user);
     } catch (error) {
       console.log(error);
       console.log(error.message);
@@ -18,7 +20,7 @@ const authSingInUser =
   async (dispatch, getState) => {
     try {
       const user = await db.auth().signInWithEmailAndPassword(email, password);
-      console.log(user);
+      console.log("userSingIn", user);
     } catch (error) {
       console.log(error);
       console.log(error.message);
@@ -26,4 +28,6 @@ const authSingInUser =
   };
 const authSingOutUser = () => async (dispatch, getState) => {};
 
-export { authSingUpUser, authSingInUser, authSingOutUser };
+const authStateChangeUser = () => async (dispatch, getState) => {};
+
+export { authSingUpUser, authSingInUser, authSingOutUser, authStateChangeUser };
