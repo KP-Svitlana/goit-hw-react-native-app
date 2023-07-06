@@ -5,10 +5,19 @@ const authSingUpUser =
   ({ login, email, password }) =>
   async (dispatch, getState) => {
     try {
-      const { user } = await db
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
-      dispatch(authSlice.actions.updateUserProfile({ userId: user.uid }));
+      await db.auth().createUserWithEmailAndPassword(email, password);
+      const user = await db.auth().currentUser;
+
+      await user.updateProfile({ displayName: login });
+
+      const updateUserSuccess = await db.auth().currentUser;
+      dispatch(
+        authSlice.actions.updateUserProfile({
+          userId: updateUserSuccess.uid,
+          login: updateUserSuccess.displayName,
+          email: updateUserSuccess.email,
+        })
+      );
       console.log("userSingUp", user);
     } catch (error) {
       console.log(error);
@@ -20,6 +29,7 @@ const authSingInUser =
   async (dispatch, getState) => {
     try {
       const user = await db.auth().signInWithEmailAndPassword(email, password);
+      dispatch(authSlice.actions.updateUserProfile({ userId: user.uid }));
       console.log("userSingIn", user);
     } catch (error) {
       console.log(error);
