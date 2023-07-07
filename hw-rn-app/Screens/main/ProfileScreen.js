@@ -11,6 +11,8 @@ import {
   FlatList,
 } from "react-native";
 
+import db from "../../firebase/config";
+
 import { Container } from "../../Components/Container";
 const gallery = [
   {
