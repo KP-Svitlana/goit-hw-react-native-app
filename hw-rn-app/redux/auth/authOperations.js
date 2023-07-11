@@ -30,12 +30,10 @@ const authSingInUser =
     try {
       await db.auth().signInWithEmailAndPassword(email, password);
       const user = await db.auth().currentUser;
-      await user.updateProfile({ displayName: login });
       const updateUserSuccess = await db.auth().currentUser;
       dispatch(
         authSlice.actions.updateUserProfile({
           userId: updateUserSuccess.uid,
-          login: updateUserSuccess.displayName,
           email: updateUserSuccess.email,
         })
       );
@@ -47,6 +45,7 @@ const authSingInUser =
   };
 const authSingOutUser = () => async (dispatch, getState) => {
   await db.auth().signOut();
+  dispatch(authSlice.actions.authSingOut());
 };
 
 const authStateChangeUser = () => async (dispatch, getState) => {
