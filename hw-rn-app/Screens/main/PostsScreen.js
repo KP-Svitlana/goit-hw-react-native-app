@@ -1,13 +1,23 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import DefaultPostsScreen from "../nestedScreens/DefaultScreenPost";
 import CommentsScreen from "../nestedScreens/CommentsScreen";
 import MapScreen from "../nestedScreens/MapScreen";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+
+import { authSingOutUser } from "../../redux/auth/authOperations";
 
 const NestedScreen = createStackNavigator();
 
 const PostsScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(authSingOutUser());
+  };
+
   return (
     <NestedScreen.Navigator
       initialRouteName="DefaultPosts"
@@ -48,7 +58,7 @@ const PostsScreen = ({ navigation }) => {
           },
 
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity onPress={logOut}>
               <Image
                 source={require("../../assets/images/logOut_icon.png")}
                 resizeMode="contain"

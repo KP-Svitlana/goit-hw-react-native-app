@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authSingOutUser } from "../../redux/auth/authOperations";
 
 import {
   TouchableOpacity,
@@ -58,6 +59,12 @@ const gallery = [
 ];
 
 export function ProfileScreen({ navigation }) {
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(authSingOutUser());
+  };
+
   return (
     <Container>
       <ImageBackground
@@ -65,10 +72,7 @@ export function ProfileScreen({ navigation }) {
         style={styles.backgroundImg}
       >
         <View style={styles.profileForm}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Login")}
-            style={{ alignItems: "flex-end" }}
-          >
+          <TouchableOpacity onPress={logOut} style={{ alignItems: "flex-end" }}>
             <Image
               source={require("../../assets/images/logOut_icon.png")}
               resizeMode="contain"
